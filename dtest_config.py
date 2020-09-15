@@ -22,6 +22,11 @@ class DTestConfig:
         self.keep_test_dir = False
         self.keep_failed_test_dir = False
         self.enable_jacoco_code_coverage = False
+        self.use_stargate = False
+        self.stargate_cmd = None
+
+        self.stargate_ip = '127.0.9.1'
+        self.stargate_port = 9052
         self.jemalloc_path = find_libjemalloc()
 
     def setup(self, request):
@@ -45,6 +50,8 @@ class DTestConfig:
         self.keep_test_dir = request.config.getoption("--keep-test-dir")
         self.keep_failed_test_dir = request.config.getoption("--keep-failed-test-dir")
         self.enable_jacoco_code_coverage = request.config.getoption("--enable-jacoco-code-coverage")
+        self.stargate_cmd = request.config.getoption("--stargate-cmd")
+        self.use_stargate = self.stargate_cmd is not None
 
     def get_version_from_build(self):
         # There are times when we want to know the C* version we're testing against
