@@ -37,7 +37,7 @@ class DTestConfig:
         self.force_execution_of_resource_intensive_tests = request.config.getoption("--force-resource-intensive-tests")
         self.skip_resource_intensive_tests = request.config.getoption("--skip-resource-intensive-tests")
         cassandra_dir = request.config.getoption("--cassandra-dir") or request.config.getini("cassandra_dir")
-        if cassandra_dir is not None:
+        if cassandra_dir is not None and cassandra_dir != '':
             self.cassandra_dir = os.path.expanduser(cassandra_dir)
         self.cassandra_version = request.config.getoption("--cassandra-version")
 
